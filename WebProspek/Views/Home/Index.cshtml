@@ -1,0 +1,180 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script type="text/javascript">
+    function flagChanged(){
+        var flag1 = $('#rbFlagBadanUsaha1')[0].checked;
+        var flag2 = $('#rbFlagBadanUsaha2')[0].checked;
+        console.log(flag1, flag2);
+        if(flag1 == true){
+            $('.div-orang').show();
+            $('.div-pengusaha').hide();
+        }
+        else{
+            $('.div-orang').hide();
+            $('.div-pengusaha').show();
+        }
+    }    
+
+
+    function resetForm(){
+        $('#txtCIFNo').val(null);
+        $('#txtNama').val(null);
+        $('#txtNPWP').val(null);
+        $('#txtEmail').val(null);
+        $('#txtNoKTP').val(null);
+        $('#cboJenisKelamin').val(null);
+        $('#txtNoAkta').val(null);
+        $('#txtAlamat').val(null);
+        $('#txtNoTelepon').val(null);
+    }
+
+    function doSave(){
+        var flag1 = $('#rbFlagBadanUsaha1')[0].checked;
+        var flag2 = $('#rbFlagBadanUsaha2')[0].checked;
+        var FlagBadanUsaha = '';
+        if(flag1 == true){ FlagBadanUsaha = 'I'; }
+        else if(flag2 == true){ FlagBadanUsaha = 'B'; }
+
+        var result = {
+            FlagBadanUsaha: FlagBadanUsaha,
+            CIFNo : $('#txtCIFNo').val(),
+            Nama : $('#txtNama').val(),
+            NPWP : $('#txtNPWP').val(),
+            Email : $('#txtEmail').val(),
+            Alamat : $('#txtAlamat').val(),
+            NoTelepon : $('#txtNoTelepon').val(),
+            NoKTP: (FlagBadanUsaha == 'I')? $('#txtNoKTP').val(): null,
+            JenisKelamin: (FlagBadanUsaha == 'I')? $('#cboJenisKelamin').val(): null,
+            NoAkta: (FlagBadanUsaha == 'B')? $('#txtNoAkta').val(): null,
+        };
+
+          $.ajax({
+            url: '/Home/Submit',
+            type: 'POST',
+            data: result,
+            success: function (result) {
+                if (result?.IsSuccess == true) {
+                    alert('Success !');
+                    resetForm();
+                }
+                else {
+                    alert( `Error ! ${result?.Message}`);
+                }
+            },
+            error: function () {
+                alert('An error occurred while processing your request.');
+            }
+        });
+    }
+</script>
+<div class="row col-md-12">
+    <div class="col-md-12 text-center" style="background-color:lightblue;">
+        <h4>
+            <b>Data Pemohon</b>
+        </h4>
+    </div>
+</div>
+<div class="row col-md-12 padding5">
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>Jenis Pemohon</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="radio" name="rbFlagBadanUsaha" id="rbFlagBadanUsaha1" value="I"   onchange="flagChanged()" /> Perorangan &nbsp;&nbsp;
+        <input type="radio" name="rbFlagBadanUsaha" id="rbFlagBadanUsaha2" value="B"   onchange="flagChanged()" /> Pengusaha/Badan Usaha &nbsp;
+    </div>
+     
+</div>
+
+<div class="row col-md-12 padding5">
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>CIF No</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="text" name="txtCIFNo" id="txtCIFNo" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>Email</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="email" name="txtEmail" id="txtEmail" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+</div>
+
+<div class="row col-md-12 padding5">
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>Nama</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="text" name="txtNama" id="txtNama" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>NPWP</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="text" name="txtNPWP" id="txtNPWP" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+</div>
+
+<div class="row col-md-12 padding5 div-orang" style="display:hidden;" >
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>Jenis Kelamin</b>
+    </div>
+    <div class="col-md-4 padding5">
+        
+        <select name="cboJenisKelamin" id="cboJenisKelamin" class="form-select">
+            <option value="L">Laki Laki</option>
+            <option value="P">Perempuan</option>
+        </select>
+
+    </div>
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>No. KTP</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="text" name="txtNoKTP" id="txtNoKTP" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+</div>
+
+<div class="row col-md-12 padding5 div-pengusaha" style="display:hidden;">
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>No. Akta</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="text" name="txtNoAkta" id="txtNoAkta" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+    
+</div>
+
+<div class="row col-md-12 padding5">
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>Alamat</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="text" name="txtAlamat" id="txtAlamat" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+    <div class="col-md-2 padding5" style="background-color:lightblue;">
+        <b>No Telepon</b>
+    </div>
+    <div class="col-md-4 padding5">
+        <input type="text" name="txtNoTelepon" id="txtNoTelepon" class="form-control" style="width:100% ; height:40px !important;" />
+    </div>
+</div>
+
+<div class="row col-md-12 padding5" style="background-color:lightblue;">
+    <div class="col-md-2 padding5" >
+       &nbsp;
+    </div>
+    <div class="col-md-4 padding5">
+       &nbsp;
+    </div>
+    <div class="col-md-3 padding5" >
+        <a class="btn btn-md btn-success" id="btnSimpan" onclick="doSave()">
+            Simpan
+        </a>
+    </div>
+    <div class="col-md-3 padding5">
+        &nbsp;
+    </div>
+</div>

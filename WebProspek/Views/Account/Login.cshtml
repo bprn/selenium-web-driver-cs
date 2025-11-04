@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<script type="text/javascript">
+    function doLogin(){
+        var userName = $('#txtUserName').val();
+        var password = $('#txtPassword').val();
+        if (userName === '' || password === '') {
+            alert('Error: User Name and Password are required!');
+            return;
+        }
+        $.ajax({
+            url: '/Account/SubmitLogin',
+            type: 'POST',
+            data: {
+                userId: userName,
+                password: password
+            },
+            success: function (result) {
+                if (result?.IsSuccess == true) {
+                    alert('Login Sukses');
+                    var returnUrl = `@ViewBag.ReturnUrl`;
+                    if(returnUrl == '' || returnUrl == null || returnUrl == '/')
+                    {
+                        window.location.href = '/Home/Index';
+                    }
+                    else{
+                        window.location.href = returnUrl;
+                    }
+                } 
+                else {
+                    alert('Login failed: ' + result?.Message);
+                }
+            },
+            error: function () {
+                alert('An error occurred while processing your request.');
+            }
+        });
+
+    }
+</script>
+
+<div class="row col-md-12">
+    <div class="col-md-4">&nbsp;</div>
+    <div class="col-md-4" style="border: 1px solid black; padding: 10px;">
+
+        <div class="row col-md-12 padding5">
+            <div class="col-md-12"><h3>Login App</h3></div>
+        </div>
+        <div class="row col-md-12 padding5">
+            <div class="col-md-4">
+                <b>User Name</b>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="txtUserName" class="form-control"  />
+            </div>
+        </div>
+        <div class="row col-md-12 padding5">
+            <div class="col-md-4">
+                <b>Password</b>
+            </div>
+            <div class="col-md-8">
+                <input type="password" id="txtPassword" class="form-control" />
+            </div>
+        </div>
+        <div class="row col-md-12 padding5">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-8">
+                <a id="btnSubmit" class="btn btn-success btn-md" onclick="doLogin()">Login</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">&nbsp;</div>
+</div>

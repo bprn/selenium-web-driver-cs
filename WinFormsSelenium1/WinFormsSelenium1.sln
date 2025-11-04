@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsSelenium1", "WinFormsSelenium1.csproj", "{0AA97F3A-973A-489F-856F-CB5319983199}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AA97F3A-973A-489F-856F-CB5319983199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA97F3A-973A-489F-856F-CB5319983199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA97F3A-973A-489F-856F-CB5319983199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA97F3A-973A-489F-856F-CB5319983199}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4A64807-8395-4E35-80EC-1A486CC05ACA}
+	EndGlobalSection
+EndGlobal
