@@ -54,6 +54,11 @@ public partial class Customer
 
     [StringLength(50)]
     [Unicode(false)]
+    public string? KodePos { get; set; }
+
+
+    [StringLength(50)]
+    [Unicode(false)]
     public string? CreatedBy { get; set; }
 
     [StringLength(50)]

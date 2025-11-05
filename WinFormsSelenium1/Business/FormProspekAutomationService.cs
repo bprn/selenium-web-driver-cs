@@ -331,7 +331,7 @@ namespace WinFormsSelenium1.Business
             }
         }
 
-
+        
         public void Step10InputSequence(DataToInput data, string username)
         {
             try
@@ -350,6 +350,28 @@ namespace WinFormsSelenium1.Business
                 throw;
             }
         }
+
+
+        public void Step10BInputSequence(DataToInput data, string username)
+        {
+            try
+            {
+                driver.FindElement(OpenQA.Selenium.By.Id("txtKodePos")).SendKeys(data?.KodePos);
+
+                logger.LogStep(ReqNumber, 11, "STEP10B", "OK", $"{data?.CIFNo}: Input txtKodePos: {data?.KodePos}", username);
+            }
+            catch (Exception ex)
+            {
+                if (driver != null)
+                {
+                    driver.Quit();
+                }
+                logger.LogStep(ReqNumber, 11, "STEP10B", "9999", $"{data?.CIFNo}: {ex.Message} {ex.StackTrace}", username);
+                throw;
+            }
+        }
+
+
 
         public void Step11SubmitSequence(DataToInput data, string username)
         {
@@ -408,6 +430,7 @@ namespace WinFormsSelenium1.Business
                     Step8InputSequence(item, username);
                     Step9InputSequence(item, username);
                     Step10InputSequence(item, username);
+                    Step10BInputSequence(item, username);
                     Step11SubmitSequence(item, username);
                 }
 

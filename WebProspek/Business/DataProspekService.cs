@@ -65,6 +65,7 @@ namespace WebProspek.Business
                     Alamat = customer.Alamat,
                     NoTelepon = customer.NoTelepon,
                     Email = customer.Email,
+                    KodePos = customer?.KodePos,
                     CreatedBy = userName,
                     CreatedDate = DateTime.Now
                 };

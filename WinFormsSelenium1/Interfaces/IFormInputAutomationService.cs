@@ -13,6 +13,7 @@ namespace WinFormsSelenium1.Interfaces
         bool InputForm(string baseAddress, string username);
         void RestartFormInputSequence(string baseAddress, string user);
         void Step10InputSequence(DataToInput data, string username);
+        void Step10BInputSequence(DataToInput data, string username);
         void Step11SubmitSequence(DataToInput data, string username);
         void Step1SelectSequence(DataToInput data, string username);
         void Step2InputSequence(DataToInput data, string username);
