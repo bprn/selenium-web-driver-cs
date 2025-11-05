@@ -7,18 +7,30 @@ namespace WinFormsSelenium1
     {
         private ILoginAutomationService loginAuto;
         private IFormInputAutomationService inputAuto;
+        private ISeleniumLoggerService loggerSvc;
         private List<OpenQA.Selenium.Cookie> sessionCookie;
 
         public Form1(
-            ILoginAutomationService loginAutomationService,
-            IFormInputAutomationService formInputAutomationService
+             ILoginAutomationService loginAutomationService,
+             IFormInputAutomationService formInputAutomationService,
+             ISeleniumLoggerService seleniumLoggerService
             )
         {
-            loginAuto = loginAutomationService;
-            inputAuto = formInputAutomationService;
+             loginAuto = loginAutomationService;
+             inputAuto = formInputAutomationService;
+             loggerSvc = seleniumLoggerService;
 
             InitializeComponent();
         }
+
+
+        private void RefreshGrid()
+        {
+            var ds = loggerSvc.GetLatestLogs(1000).ToList();
+            gvLogs.DataSource = ds;
+            gvLogs.Refresh();
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -40,7 +52,8 @@ namespace WinFormsSelenium1
             {
                 MessageBox.Show("Login Failed or Error");
             }
-
+            RefreshGrid();
+            this.BringToFront();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -54,12 +67,13 @@ namespace WinFormsSelenium1
             {
                 MessageBox.Show("Logout Failed or Error");
             }
-
+            RefreshGrid();
+            this.BringToFront();
         }
 
         private void btnAutoInputProspek_Click(object sender, EventArgs e)
         {
-            if(sessionCookie != null)
+            if (sessionCookie != null)
             {
                 inputAuto.ApplySessionCookie(sessionCookie);
             }
@@ -72,7 +86,13 @@ namespace WinFormsSelenium1
             {
                 MessageBox.Show("Input Data Failed or Contain Error");
             }
+            RefreshGrid();
+            this.BringToFront();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            RefreshGrid();
         }
     }
 }

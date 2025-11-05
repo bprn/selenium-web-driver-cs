@@ -55,5 +55,24 @@ namespace WinFormsSelenium1.Business
             }
         }
 
+
+        public IQueryable<Entities.SeleniumApp.SeleniumLog> GetLogsBySession(string sessionReg)
+        {
+            ArgumentNullException.ThrowIfNullOrWhiteSpace(sessionReg);
+            return dBContext.SeleniumLogs.Where(x => x.RegNo == sessionReg).AsQueryable();            
+        }
+
+        public IQueryable<Entities.SeleniumApp.SeleniumLog> GetAllLogs()
+        {
+            return dBContext.SeleniumLogs.AsQueryable();            
+        }
+
+        public IQueryable<Entities.SeleniumApp.SeleniumLog> GetLatestLogs(int logCount)
+        {
+            return dBContext.SeleniumLogs.OrderByDescending(l => l.LogDate).Take(logCount).AsQueryable();
+        }
+
+
+
     }
 }

@@ -362,7 +362,9 @@ namespace WinFormsSelenium1.Business
                 var alertText = alert.Text;
                 alert.Accept();
 
-                if (alertText?.ToUpper()?.Contains("SUKSES") == true)
+                if (alertText?.ToUpper()?.Contains("SUKSES") == true
+                    || alertText?.ToLower()?.Contains("success") == true
+                    )
                 {
                     //sukses
                     logger.LogStep(ReqNumber, 12, "STEP11", "OK", $"{data?.CIFNo}: Submit success for user {username}", username);

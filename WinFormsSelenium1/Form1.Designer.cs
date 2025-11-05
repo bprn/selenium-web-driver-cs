@@ -37,12 +37,14 @@
             txtUsername = new TextBox();
             label2 = new Label();
             tabPage2 = new TabPage();
+            btnAutoInputProspek = new Button();
             label1 = new Label();
             txtBaseAddress = new TextBox();
-            btnAutoInputProspek = new Button();
+            gvLogs = new DataGridView();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gvLogs).BeginInit();
             SuspendLayout();
             // 
             // btnLogin
@@ -60,10 +62,10 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Dock = DockStyle.Bottom;
-            tabControl1.Location = new Point(0, 61);
+            tabControl1.Location = new Point(0, 62);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1012, 548);
+            tabControl1.Size = new Size(1012, 300);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -77,7 +79,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1004, 520);
+            tabPage1.Size = new Size(1004, 272);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Winform LOGIN";
             tabPage1.UseVisualStyleBackColor = true;
@@ -132,10 +134,20 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1004, 520);
+            tabPage2.Size = new Size(1004, 272);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Wnform FORM PROSPEK";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnAutoInputProspek
+            // 
+            btnAutoInputProspek.Location = new Point(23, 38);
+            btnAutoInputProspek.Name = "btnAutoInputProspek";
+            btnAutoInputProspek.Size = new Size(178, 41);
+            btnAutoInputProspek.TabIndex = 0;
+            btnAutoInputProspek.Text = "Auto Input";
+            btnAutoInputProspek.UseVisualStyleBackColor = true;
+            btnAutoInputProspek.Click += btnAutoInputProspek_Click;
             // 
             // label1
             // 
@@ -154,30 +166,35 @@
             txtBaseAddress.TabIndex = 3;
             txtBaseAddress.Text = "https://localhost:7138/";
             // 
-            // btnAutoInputProspek
+            // gvLogs
             // 
-            btnAutoInputProspek.Location = new Point(23, 38);
-            btnAutoInputProspek.Name = "btnAutoInputProspek";
-            btnAutoInputProspek.Size = new Size(178, 41);
-            btnAutoInputProspek.TabIndex = 0;
-            btnAutoInputProspek.Text = "Auto Input";
-            btnAutoInputProspek.UseVisualStyleBackColor = true;
-            btnAutoInputProspek.Click += btnAutoInputProspek_Click;
+            gvLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            gvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvLogs.Dock = DockStyle.Bottom;
+            gvLogs.EditMode = DataGridViewEditMode.EditProgrammatically;
+            gvLogs.Location = new Point(0, 362);
+            gvLogs.Name = "gvLogs";
+            gvLogs.ReadOnly = true;
+            gvLogs.Size = new Size(1012, 259);
+            gvLogs.TabIndex = 4;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1012, 609);
+            ClientSize = new Size(1012, 621);
+            Controls.Add(tabControl1);
+            Controls.Add(gvLogs);
             Controls.Add(txtBaseAddress);
             Controls.Add(label1);
-            Controls.Add(tabControl1);
             Name = "Form1";
             Text = "Selenium Web Form";
+            Load += Form1_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gvLogs).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -196,5 +213,6 @@
         private TextBox txtBaseAddress;
         private Button btnLogout;
         private Button btnAutoInputProspek;
+        private DataGridView gvLogs;
     }
 }
